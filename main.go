@@ -25,10 +25,16 @@ type (
 		Translation interface{}
 	}
 
-	TFuncHandler func(translationId string)
+	TFuncHandler func(translationId string, args ...interface{}) string
 )
 
-func Tfunc(lang string) func(translationId string, args ...interface{}) string {
+func CheckLang(lang string) (ok bool) {
+	_, ok = instance.Translations[lang]
+
+	return
+}
+
+func Tfunc(lang string) TFuncHandler {
 	return func(translationId string, args ...interface{}) string {
 		return translate(lang, translationId, args...)
 	}
