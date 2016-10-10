@@ -8,7 +8,6 @@ import (
 	"path"
 	"strings"
 	"text/template"
-	"fmt"
 )
 
 var instance *i18n
@@ -98,7 +97,7 @@ func translate(lang, translationId string, args... interface{}) (result string) 
 		if err != nil {
 			return translationId
 		}
-		fmt.Println(translationId, count, p)
+
 		dataMap, ok = instance.Translations[lang][translationId].(map[string]interface{})
 		if !ok {
 			return translationId
